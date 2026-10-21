@@ -53,7 +53,7 @@ $env:FACE_IMAGEM_TESTE="C:\caminho\foto.jpg"; pytest tests\test_face.py
 |---|---|---|
 | `mutirao/` | Gestão do mutirão: evento, postos, cotas, perfis | RF-01, RF-02 |
 | `credenciamento/` | Credenciamento: dados mínimos, consentimento, foto, QR, triagem | RF-03 a RF-07, RD-01, RD-02, RD-05, RD-06, RNF-10 |
-| `acesso/` | Reconhecimento facial, entrada nos setores, atendimentos | RF-08, RF-09, RF-14, RD-03, RD-04, RNF-09 |
+| `acesso/` | Reconhecimento facial, entrada nos setores, atendimentos; catálogo de serviços e instituições e a oferta por mutirão | RF-08, RF-09, RF-14, RF-19, RD-03, RD-04, RD-07, RNF-09 |
 | `entregas/` | Alimentos e roupas: cotas, bloqueio da 2ª retirada, estoque | RF-10 a RF-13 |
 | `auditoria/` | Trilha de auditoria somente de inclusão | RF-17, RNF-12 |
 | `core/cripto.py` | Fotos e modelos faciais cifrados em AES-256 | RNF-08 |
@@ -61,14 +61,13 @@ $env:FACE_IMAGEM_TESTE="C:\caminho\foto.jpg"; pytest tests\test_face.py
 
 ## Situação
 
-Pronto nesta versão: modelo de dados dos quatro setores, regras de cota e bloqueio da segunda retirada, cifragem dos dados faciais, trilha de auditoria imutável, reconhecimento facial com OpenCV e painel administrativo.
+Pronto nesta versão: modelo de dados dos quatro setores, regras de cota e bloqueio da segunda retirada, cifragem dos dados faciais, trilha de auditoria imutável, reconhecimento facial com OpenCV, painel administrativo e o CRUD de serviços no painel (RF-19), com os 15 serviços do CNJ já cadastrados.
 
 Próximas etapas, conforme o cronograma (item 3.b):
 
 - Telas do celular para os postos (item 3.g)
 - Credencial com QR para impressão (RF-06)
 - Painel em tempo real e relatório final do CNJ (RF-15, RF-16)
-- Eliminação dos dados faciais ao encerrar o mutirão (RF-18)
 - Operação sem internet e sincronização com a nuvem (RNF-04)
 
 ## Câmera no celular
