@@ -1,0 +1,7 @@
+Django==5.2.18
+dj-database-url==3.1.2
+psycopg[binary]==3.3.6
+bcrypt==5.0.0
+cryptography==50.0.2
+numpy==2.5.3
+opencv-python-headless==4.14.0.94

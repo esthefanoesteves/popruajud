@@ -1,0 +1,35 @@
+# Ambiente de desenvolvimento: PostgreSQL + Django.
+# Uso: docker compose up --build
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: popruajud
+      POSTGRES_USER: popruajud
+      POSTGRES_PASSWORD: popruajud
+    volumes:
+      - dados:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U popruajud"]
+      interval: 5s
+      retries: 10
+
+  web:
+    build: .
+    environment:
+      DJANGO_DEBUG: "1"
+      DJANGO_ALLOWED_HOSTS: "*"
+      DATABASE_URL: postgres://popruajud:popruajud@db:5432/popruajud
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  dados:

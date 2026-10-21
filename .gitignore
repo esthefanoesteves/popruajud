@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+
+# Segredos e dados locais
+.env
+
+# Modelos do OpenCV (baixados por scripts/baixar_modelos.py)
+modelos/*.onnx
+
+# Relatórios de auditoria de código
+relatorios/
+
+# Editores
+.vscode/
+.idea/
