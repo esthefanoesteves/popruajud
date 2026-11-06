@@ -23,7 +23,7 @@ class Mutirao(models.Model):
     cota_almoco_dia = models.PositiveSmallIntegerField("cota de almoço por dia", default=1)
     # RF-12: definida pela coordenação antes do evento (premissa do escopo).
     cota_roupas_pessoa = models.PositiveSmallIntegerField("cota de peças de roupa por pessoa")
-    # RF-18: marca o fim do tratamento dos dados faciais.
+    # UC-18: depois do encerramento, o mutirão não aceita mais alterações.
     encerrado_em = models.DateTimeField(null=True, blank=True)
 
     class Meta:

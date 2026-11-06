@@ -54,3 +54,17 @@ def registrar(usuario, acao: str, objeto, posto=None, **detalhes) -> RegistroAud
     return RegistroAuditoria.objects.create(
         usuario=usuario, acao=acao, objeto=str(objeto)[:200], posto=posto, detalhes=detalhes
     )
+
+
+def _texto(obj, campo: str) -> str:
+    valor = getattr(obj, campo)
+    return "" if valor is None else str(valor)
+
+
+def diferencas(antes, depois, campos) -> dict:
+    """Antes e depois de cada campo que mudou, em texto, para os detalhes da auditoria."""
+    return {
+        campo: {"antes": _texto(antes, campo), "depois": _texto(depois, campo)}
+        for campo in campos
+        if _texto(antes, campo) != _texto(depois, campo)
+    }

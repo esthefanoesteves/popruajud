@@ -1,0 +1,35 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls %}
+{% comment %}UC-05 A1: copiar os serviços oferecidos de outro mutirão (RF-19).{% endcomment %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+  &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+  &rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+  &rsaquo; <a href="{% url opts|admin_urlname:'change' original.pk|admin_urlquote %}">{{ original }}</a>
+  &rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <p>Traz para <strong>{{ original }}</strong> os serviços oferecidos e ativos do mutirão escolhido.
+    O que já está neste mutirão não se repete. Depois, revise a lista na tela do mutirão.</p>
+  <form method="post">
+    {% csrf_token %}
+    <fieldset class="module aligned">
+      {% for campo in form %}
+        <div class="form-row">
+          {{ campo.errors }}
+          <div class="flex-container">{{ campo.label_tag }} {{ campo }}</div>
+        </div>
+      {% endfor %}
+    </fieldset>
+    <div class="submit-row">
+      <input type="submit" value="Copiar" class="default">
+      <a href="{% url opts|admin_urlname:'change' original.pk|admin_urlquote %}" class="closelink">{% translate 'Cancel' %}</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

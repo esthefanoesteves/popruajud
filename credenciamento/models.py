@@ -41,8 +41,8 @@ class Pessoa(models.Model):
     consentimento_em = models.DateTimeField(null=True, blank=True)
     # RF-06: o QR da credencial carrega só este token, nunca dados pessoais.
     token_qr = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-    # RF-07: triagem dos serviços desejados.
-    servicos_desejados = models.ManyToManyField("acesso.TipoServico", blank=True)
+    # RF-07: triagem dos serviços desejados; a tela mostra só os oferecidos no mutirão (RN-06).
+    servicos_desejados = models.ManyToManyField("acesso.Servico", blank=True, verbose_name="serviços desejados")
     credenciado_por = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True, blank=True, related_name="+"
     )
@@ -86,7 +86,7 @@ class Pessoa(models.Model):
 class DadosFaciais(models.Model):
     """Foto de referência e modelo facial (RF-05), cifrados em repouso (RNF-08).
 
-    RD-02: só existe com consentimento. RF-18 / RD-08: apagados ao encerrar o mutirão.
+    RD-02: só existe com consentimento.
     """
 
     pessoa = models.OneToOneField(Pessoa, on_delete=models.CASCADE, related_name="dados_faciais")
